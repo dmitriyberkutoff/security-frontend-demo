@@ -11,8 +11,9 @@ const invoices = [{
     time: new Date(Date.now()).toLocaleString()
 }];
 
-let bio = 'bio';
-let city = 'city';
+let bio = 'Студент';
+let city = 'Питер';
+let name = 'Дима'
 
 app.use(cors());
 
@@ -35,6 +36,17 @@ app.get('/invoices', (req, res) => {
         items: invoices
     });
 });
+
+app.get('/name', (req, res) => {
+    res.send({
+        name: name
+    })
+})
+
+app.post('/setName', (req, res) => {
+    name = req.body.name;
+    res.send('ok');
+})
 
 app.post('/buy', (req, res) => {
     const invoice = {
