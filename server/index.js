@@ -4,11 +4,13 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
+const startDate = new Date(Date.now()).toLocaleString();
+
 const invoices = [{
     id: 1,
     count: 2,
     price: 70,
-    time: new Date(Date.now()).toLocaleString()
+    time: startDate
 }];
 
 let bio = 'Студент';
@@ -61,10 +63,20 @@ app.post('/buy', (req, res) => {
 })
 
 app.get('/invoice/:id', (req, res) => {
-    res.send({
-        ...invoices[+req.params.id-1],
-        card: 'card nomber of ' + req.params.id
-    })
+    if (+req.params.id === 10) {
+        res.send({
+            id: 10,
+            count: 33,
+            price: 33*35,
+            time: startDate,
+            card: 'other person card number'
+        })
+    } else {
+        res.send({
+            ...invoices[+req.params.id-1],
+            card: 'card number of ' + req.params.id
+        })
+    }
 })
 
 app.get('/info', (req, res) => {
